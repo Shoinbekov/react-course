@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #222;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 8px 0 0;
+}
+
+main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    margin-top: 0;
+    color: #1f2937;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.result {
+    background-color: #f8fafc;
+    border-left: 4px solid #1f2937;
+    padding: 15px 20px;
+    border-radius: 6px;
+}
+
+.result p {
+    margin: 7px 0;
+}
+
+.student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.student-card {
+    background-color: #f8fafc;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.student-card h3 {
+    margin-top: 0;
+}
+
+.student-card p {
+    margin: 6px 0;
+}
+
+.passed {
+    font-weight: bold;
+}
+
+.failed {
+    font-weight: bold;
+}
+
+.summary {
+    margin-top: 20px;
+}
+
+code {
+    background-color: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+footer {
+    text-align: center;
+    background-color: #1f2937;
+    color: white;
+    padding: 20px;
+    margin-top: 40px;
+}
