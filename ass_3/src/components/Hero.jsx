@@ -37,7 +37,10 @@ function Hero() {
             <div className="portrait-glow"></div>
 
             <div className="portrait">
-  <img src="/myimage2.jpg" alt="Shoinbek Shoinbekov" />
+  <img
+    src={`${import.meta.env.BASE_URL}myimage2.jpg`}
+    alt="Shoinbek Shoinbekov"
+  />
 </div>
 
             <div className="available">
