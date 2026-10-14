@@ -5,22 +5,22 @@ You can search by name, active ingredient or manufacturer, filter by category, f
 sort the results, open a medicine to see its details and cheaper alternatives with the same active ingredient,
 and add new medicines through a form.
 
-**Live demo:** _add your deployed link here_ (for example `https://pharmafind.vercel.app`)
+**Live demo:** https://react-course-one-beta.vercel.app
 
 ## Features
 
-| Requirement | Where |
-|---|---|
-| List view with 120 initial records | `src/pages/CatalogPage.jsx`, data in `src/data/medicines.json` |
-| Detail view | `src/pages/MedicineDetailsPage.jsx` (`/#/medicines/:id`) |
-| Controlled form for adding an item, with validation | `src/components/MedicineForm.jsx`, `src/pages/AddMedicinePage.jsx` |
-| Search (debounced, 400 ms) | `src/components/SearchBar.jsx`, `src/hooks/useDebouncedValue.js` |
-| Filtering: category, form, availability (in stock / OTC / Rx), max price | `src/components/FilterPanel.jsx` |
-| Sorting: name, price, rating, newest | `src/components/FilterPanel.jsx`, `src/api/medicinesApi.js` |
-| Pagination (12 per page) | `src/components/Pagination.jsx` |
-| Loading / error / empty / success states | `src/pages/CatalogPage.jsx`, `src/components/StatusMessage.jsx`, `LoadingGrid.jsx`, `Spinner.jsx` |
-| Effect cleanup and race-condition protection | `AbortController` in `src/hooks/useMedicines.js`, `MedicineDetailsPage.jsx`, `AlternativesList.jsx` |
-| State reset with `key` | `<QuantityPicker key={medicine.id} />` in `MedicineDetailsPage.jsx` |
+| Requirement                                                              | Where                                                                                               |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| List view with 120 initial records                                       | `src/pages/CatalogPage.jsx`, data in `src/data/medicines.json`                                      |
+| Detail view                                                              | `src/pages/MedicineDetailsPage.jsx` (`/#/medicines/:id`)                                            |
+| Controlled form for adding an item, with validation                      | `src/components/MedicineForm.jsx`, `src/pages/AddMedicinePage.jsx`                                  |
+| Search (debounced, 400 ms)                                               | `src/components/SearchBar.jsx`, `src/hooks/useDebouncedValue.js`                                    |
+| Filtering: category, form, availability (in stock / OTC / Rx), max price | `src/components/FilterPanel.jsx`                                                                    |
+| Sorting: name, price, rating, newest                                     | `src/components/FilterPanel.jsx`, `src/api/medicinesApi.js`                                         |
+| Pagination (12 per page)                                                 | `src/components/Pagination.jsx`                                                                     |
+| Loading / error / empty / success states                                 | `src/pages/CatalogPage.jsx`, `src/components/StatusMessage.jsx`, `LoadingGrid.jsx`, `Spinner.jsx`   |
+| Effect cleanup and race-condition protection                             | `AbortController` in `src/hooks/useMedicines.js`, `MedicineDetailsPage.jsx`, `AlternativesList.jsx` |
+| State reset with `key`                                                   | `<QuantityPicker key={medicine.id} />` in `MedicineDetailsPage.jsx`                                 |
 
 ## Data source — simulated API
 
@@ -33,12 +33,12 @@ The app uses a **simulated REST API** (`src/api/medicinesApi.js`):
 - requests can be cancelled with an `AbortSignal`, like `fetch`;
 - `FAIL_RATE` at the top of the file makes requests fail randomly — set it to `0.3` to see the error state.
 
-| Function | Imitates |
-|---|---|
-| `getMedicines(query, { signal })` | `GET /medicines?search=&category=&form=&availability=&maxPrice=&sort=&page=` |
-| `getMedicineById(id, { signal })` | `GET /medicines/:id` |
-| `getAlternatives(id, ingredient, { signal })` | `GET /medicines?ingredient=…` |
-| `createMedicine(data)` | `POST /medicines` |
+| Function                                      | Imitates                                                                     |
+| --------------------------------------------- | ---------------------------------------------------------------------------- |
+| `getMedicines(query, { signal })`             | `GET /medicines?search=&category=&form=&availability=&maxPrice=&sort=&page=` |
+| `getMedicineById(id, { signal })`             | `GET /medicines/:id`                                                         |
+| `getAlternatives(id, ingredient, { signal })` | `GET /medicines?ingredient=…`                                                |
+| `createMedicine(data)`                        | `POST /medicines`                                                            |
 
 The seed file is generated by `scripts/generate-data.mjs` (`npm run generate-data`).
 Medicine names are real generic/brand names; prices, stock and ratings are demo values.
@@ -80,15 +80,15 @@ src/
 
 ## Where state lives
 
-| State | Component | Why |
-|---|---|---|
-| Catalog query (search, filters, sort, page) | `App` | `CatalogPage` unmounts when a detail page opens; keeping the query in `App` restores the same search and page after "Back to catalog". |
-| Loaded page, loading/error status | `useMedicines` (used by `CatalogPage`) | only the catalog needs it |
-| Loaded medicine | `MedicineDetailsPage` | belongs to one page |
-| Alternatives | `AlternativesList` | the component loads its own data |
-| Number of packages | `QuantityPicker` | local UI state; reset with `key` when the medicine changes |
-| Form values, touched fields | `MedicineForm` | local to the form |
-| Submitting / server error | `AddMedicinePage` | the page talks to the API |
+| State                                       | Component                              | Why                                                                                                                                    |
+| ------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Catalog query (search, filters, sort, page) | `App`                                  | `CatalogPage` unmounts when a detail page opens; keeping the query in `App` restores the same search and page after "Back to catalog". |
+| Loaded page, loading/error status           | `useMedicines` (used by `CatalogPage`) | only the catalog needs it                                                                                                              |
+| Loaded medicine                             | `MedicineDetailsPage`                  | belongs to one page                                                                                                                    |
+| Alternatives                                | `AlternativesList`                     | the component loads its own data                                                                                                       |
+| Number of packages                          | `QuantityPicker`                       | local UI state; reset with `key` when the medicine changes                                                                             |
+| Form values, touched fields                 | `MedicineForm`                         | local to the form                                                                                                                      |
+| Submitting / server error                   | `AddMedicinePage`                      | the page talks to the API                                                                                                              |
 
 Loading status is **derived**: each response is stored together with the key of the request it belongs to;
 if that key differs from the current one, the current request is still loading.
@@ -115,4 +115,4 @@ The app is a static site, so it can be deployed to Vercel, Netlify or GitHub Pag
 `HashRouter` and `base: './'` in `vite.config.js` make every page (including `/#/medicines/5`) work after a refresh
 without extra server configuration.
 
-**Vercel:** import the GitHub repository → framework preset *Vite* → build command `npm run build`, output directory `dist` → Deploy.
+**Vercel:** import the GitHub repository → framework preset _Vite_ → build command `npm run build`, output directory `dist` → Deploy.
