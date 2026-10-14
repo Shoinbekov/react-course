@@ -4,7 +4,7 @@ A React app for managing the crew of an orbital station. It works with the provi
 [fake API](https://github.com/leravanna/fake-api) (Promises, random delays 0.5–3 s, random errors, `localStorage`)
 as if it were a real backend.
 
-**Live demo:** _add your deployed link here_
+**Live demo:** https://orbit-crew-lemon.vercel.app
 
 ## What you can do
 
